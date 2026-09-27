@@ -1,0 +1,46 @@
+name: Migrate Veyra into Fang and Forge
+
+on:
+  push:
+    paths:
+      - ".github/workflows/migrate-veyra.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Fang and Forge site
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clone current Veyra public site
+        run: |
+          git clone --depth 1 https://github.com/zacharvieux/veyra-world.git /tmp/veyra-world
+
+      - name: Replace Veyra placeholder with built site
+        run: |
+          rm -rf worlds/veyra
+          mkdir -p worlds/veyra
+
+          cp /tmp/veyra-world/index.html worlds/veyra/index.html
+          cp -R /tmp/veyra-world/assets worlds/veyra/assets
+          cp -R /tmp/veyra-world/world-guide worlds/veyra/world-guide
+          cp -R /tmp/veyra-world/rules worlds/veyra/rules
+          cp -R /tmp/veyra-world/character-sheet worlds/veyra/character-sheet
+
+      - name: Commit migrated Veyra site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add worlds/veyra
+          if git diff --cached --quiet; then
+            echo "No Veyra changes to commit."
+          else
+            git commit -m "Migrate built Veyra site into Fang and Forge"
+            git push origin HEAD:main
+          fi
