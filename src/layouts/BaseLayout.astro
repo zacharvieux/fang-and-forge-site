@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Fang & Forge Productions creates worlds, stories, tabletop experiences, and digital projects.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="/">FANG <span>&</span> FORGE</a>
+        <div class="nav-links">
+          <a href="/about">About</a>
+          <a href="/worlds">Worlds</a>
+          <a href="/projects">Projects</a>
+          <a href="/support">Support</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <strong>Fang & Forge Productions</strong>
+        <div>Worlds, stories, games, and tools in development.</div>
+      </div>
+    </footer>
+  </body>
+</html>
