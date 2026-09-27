@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Worlds | Fang & Forge Productions">
@@ -19,7 +21,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <article class="card">
         <h2>Veyra</h2>
         <p>The first world being developed and migrated into the Fang & Forge platform.</p>
-        <a href="/worlds/veyra">Explore Veyra →</a>
+        <a href={`${base}worlds/veyra`}>Explore Veyra →</a>
       </article>
 
       <article class="card">
