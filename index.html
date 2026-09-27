@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Fang & Forge Productions is an independent creative studio building original worlds, stories, tabletop experiences, and digital tools.">
   <title>Fang & Forge Productions</title>
+  <link rel="icon" type="image/png" href="assets/images/brand/fang-and-forge-primary-logo.png.png">
+  <link rel="apple-touch-icon" href="assets/images/brand/fang-and-forge-primary-logo.png.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
   <header class="site-header">
     <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="./">FANG <span>&amp;</span> FORGE</a>
+      <a class="brand" href="./">
+        <img class="brand-icon" src="assets/images/brand/fang-and-forge-primary-logo.png.png" alt="">
+        <span class="brand-name">FANG <b>&amp;</b> FORGE</span>
+      </a>
       <div class="nav-links">
-        <a href="about/">Who We Are</a>
+        <a href="who-we-are/">Who We Are</a>
         <a href="worlds/">Worlds</a>
         <a href="projects/">Projects</a>
         <a href="support/">Support</a>
       </div>
     </nav>
   </header>
+
   <main>
     <section class="hero">
       <div class="container hero-split">
@@ -29,7 +35,7 @@
           <p class="lead">Fang &amp; Forge Productions is building original settings, stories, tabletop experiences, and digital tools. Veyra is our first world, with more worlds and projects to come.</p>
           <div class="actions">
             <a class="button" href="worlds/veyra/">Explore Veyra</a>
-            <a class="button secondary" href="about/">Who we are</a>
+            <a class="button secondary" href="who-we-are/">Who we are</a>
           </div>
         </div>
         <div class="hero-logo-card">
@@ -37,17 +43,34 @@
         </div>
       </div>
     </section>
+
     <section class="section">
       <div class="container">
         <div class="eyebrow">What we're creating</div>
         <h2>One studio. Many worlds.</h2>
         <div class="grid">
-          <article class="card"><h3>Veyra</h3><p>Our first developing world: a setting for lore, stories, campaigns, maps, characters, and future releases.</p><a href="worlds/veyra/">Enter Veyra →</a></article>
-          <article class="card"><h3>Tabletop &amp; VTT Projects</h3><p>We are experimenting with tools and systems designed to make tabletop worlds easier to run, explore, and share.</p><a href="projects/">See our projects →</a></article>
-          <article class="card"><h3>Future Worlds</h3><p>Veyra is the beginning. Fang &amp; Forge is designed to become a home for additional original settings and creative projects.</p><a href="worlds/">View worlds →</a></article>
+          <article class="card">
+            <svg class="card-icon" aria-hidden="true"><use href="assets/icons/icons.svg#world"></use></svg>
+            <h3>Veyra</h3>
+            <p>Our first developing world: a setting for lore, stories, campaigns, maps, characters, and future releases.</p>
+            <a href="worlds/veyra/">Enter Veyra →</a>
+          </article>
+          <article class="card">
+            <svg class="card-icon" aria-hidden="true"><use href="assets/icons/icons.svg#dice"></use></svg>
+            <h3>Tabletop &amp; VTT Projects</h3>
+            <p>We are experimenting with tools and systems designed to make tabletop worlds easier to run, explore, and share.</p>
+            <a href="projects/">See our projects →</a>
+          </article>
+          <article class="card">
+            <svg class="card-icon" aria-hidden="true"><use href="assets/icons/icons.svg#flame"></use></svg>
+            <h3>Future Worlds</h3>
+            <p>Veyra is the beginning. Fang &amp; Forge is designed to become a home for additional original settings and creative projects.</p>
+            <a href="worlds/">View worlds →</a>
+          </article>
         </div>
       </div>
     </section>
+
     <section class="section">
       <div class="container copy">
         <div class="eyebrow">Follow the build</div>
@@ -57,6 +80,13 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><strong>Fang &amp; Forge Productions</strong><div>Worlds, stories, games, and tools in development.</div><small>&copy; <span data-current-year></span> Fang &amp; Forge Productions</small></div></footer>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <strong>Fang &amp; Forge Productions</strong>
+      <div>Worlds, stories, games, and tools in development.</div>
+      <small>&copy; <span data-current-year></span> Fang &amp; Forge Productions</small>
+    </div>
+  </footer>
 </body>
 </html>
