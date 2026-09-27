@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Veyra | Fang & Forge Productions">
@@ -15,7 +17,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         characters, maps, campaigns, and future releases.
       </p>
       <div class="actions">
-        <a class="button secondary" href="/worlds">Back to worlds</a>
+        <a class="button secondary" href={`${base}worlds`}>Back to worlds</a>
       </div>
     </div>
   </section>
