@@ -27,3 +27,23 @@ document.querySelectorAll(refreshedAssetSelectors).forEach((image) => {
     image.src = currentSrc.replace(/\.webp$/i, '.png');
   }
 });
+
+
+const studioHome = siteScript ? new URL('../../../../', siteScript.src).href : '/';
+const studioCreditMarkup = `<p class="studio-credit">Veyra is an original world by <a href="${studioHome}">Fang &amp; Forge Productions</a>.</p>`;
+const veyraFooter = document.querySelector('.site-footer');
+
+if (veyraFooter) {
+  const creditWrap = document.createElement('div');
+  creditWrap.className = 'shell studio-credit-wrap';
+  creditWrap.innerHTML = studioCreditMarkup;
+  veyraFooter.appendChild(creditWrap);
+} else {
+  const main = document.querySelector('main');
+  if (main) {
+    const creditFooter = document.createElement('footer');
+    creditFooter.className = 'site-footer studio-only-footer no-print';
+    creditFooter.innerHTML = `<div class="shell studio-credit-wrap">${studioCreditMarkup}</div>`;
+    main.insertAdjacentElement('afterend', creditFooter);
+  }
+}
