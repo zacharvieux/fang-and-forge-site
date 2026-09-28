@@ -1,0 +1,124 @@
+name: One-time Veyra header branding
+
+on:
+  push:
+    paths:
+      - ".github/workflows/update-veyra-header.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update-veyra-branding:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Fang and Forge
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply shared studio header to every Veyra HTML page
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          import re
+
+          veyra = Path("worlds/veyra")
+          pages = sorted(veyra.rglob("*.html"))
+          header_brand = re.compile(r'<a\s+class="brand"[^>]*>[\s\S]*?</a>', re.I)
+          nav_open = re.compile(r'(<nav\b[^>]*\bid="primary-nav"[^>]*>)', re.I)
+          if len(pages) < 35:
+              raise RuntimeError(f"Expected all Veyra pages, found {len(pages)}")
+
+          updated = []
+          for page in pages:
+              content = page.read_text(encoding="utf-8")
+              site_root = os.path.relpath(".", page.parent).replace(os.sep, "/") + "/"
+              home = os.path.relpath(veyra / "index.html", page.parent).replace(os.sep, "/")
+              studio_link = (
+                  f'<a class="brand studio-brand" href="{site_root}" '
+                  f'aria-label="Fang and Forge Productions home">'
+                  f'<img class="brand-mark-image" '
+                  f'src="{site_root}assets/images/brand/fang-and-forge-primary-logo.png.png" '
+                  f'alt="" width="40" height="40">'
+                  f'<span class="brand-name">FANG <b>&amp;</b> FORGE '
+                  f'<small>PRODUCTIONS</small></span></a>'
+              )
+              content, count = header_brand.subn(lambda match: studio_link, content, count=1)
+              if count != 1:
+                  raise RuntimeError(f"Expected one Veyra header logo in {page}, found {count}")
+
+              new_home_link = f'<a href="{home}">Veyra Home</a>'
+              content, nav_count = nav_open.subn(
+                  lambda match: match.group(1) + new_home_link,
+                  content,
+                  count=1,
+              )
+              if nav_count != 1:
+                  raise RuntimeError(f"Expected Veyra primary nav in {page}, found {nav_count}")
+
+              page.write_text(content, encoding="utf-8")
+              updated.append(str(page))
+
+          css_path = veyra / "assets/css/site.css"
+          css = css_path.read_text(encoding="utf-8")
+          css += """
+
+          /* Fang & Forge parent-studio header used across Veyra. */
+          .studio-brand .brand-mark-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: .3rem;
+            background: #f4efe7;
+          }
+          .studio-brand .brand-name {
+            font: 800 .82rem/1.05 var(--sans);
+            letter-spacing: .09em;
+            white-space: nowrap;
+          }
+          .studio-brand .brand-name b { color: var(--gold-bright); }
+          .studio-brand .brand-name small {
+            display: block;
+            margin-top: .33rem;
+            color: var(--muted);
+            font: 700 .56rem/1.05 var(--sans);
+            letter-spacing: .2em;
+          }
+          .site-nav { gap: clamp(.65rem, 1.15vw, 1.4rem); }
+
+          /* Additional Veyra Home link makes collapsed navigation appropriate on tablets. */
+          @media (max-width: 1000px) {
+            .nav-toggle { display: inline-flex; }
+            .site-nav {
+              display: none;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              right: 0;
+              padding: 1rem;
+              flex-direction: column;
+              background: var(--bg);
+              border-bottom: 1px solid var(--line);
+            }
+            .site-nav.open { display: flex; }
+          }
+          """
+          css_path.write_text(css, encoding="utf-8")
+          print(f"Updated headers and Veyra Home links in {len(updated)} Veyra pages.")
+          for path in updated:
+              print(path)
+          PY
+
+      - name: Commit branding updates
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add worlds/veyra
+          git diff --cached --quiet && { echo "Nothing changed"; exit 1; }
+          git commit -m "Use Fang and Forge studio header throughout Veyra"
+          git push origin HEAD:main
