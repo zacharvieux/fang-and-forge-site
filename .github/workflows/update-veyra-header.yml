@@ -49,6 +49,9 @@ jobs:
               )
               content, count = header_brand.subn(lambda match: studio_link, content, count=1)
               if count != 1:
+                  if 'http-equiv="refresh"' in content:
+                      print(f"Skipping redirect-only page: {page}")
+                      continue
                   raise RuntimeError(f"Expected one Veyra header logo in {page}, found {count}")
 
               new_home_link = f'<a href="{home}">Veyra Home</a>'
