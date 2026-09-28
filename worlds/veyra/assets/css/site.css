@@ -270,3 +270,28 @@ blockquote p { font-size: clamp(1.7rem, 4vw, 3.2rem) !important; line-height: 1.
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+.studio-credit-wrap {
+  padding: 0 0 1.35rem;
+  text-align: center;
+}
+.studio-credit {
+  margin: 0;
+  color: var(--muted);
+  font: .78rem/1.5 var(--sans);
+}
+.studio-credit a {
+  color: var(--gold-bright);
+  font-weight: 800;
+  text-decoration: none;
+}
+.studio-credit a:hover,
+.studio-credit a:focus-visible {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.studio-only-footer {
+  margin-top: 2rem;
+  padding-top: 1.35rem;
+}
