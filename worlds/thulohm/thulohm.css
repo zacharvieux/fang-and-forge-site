@@ -88,31 +88,9 @@ a:focus-visible {outline:2px solid var(--gold-bright);outline-offset:4px;}
 .destination-taurniel .destination-scene img {object-position:57% center;}
 .destination-adamant .destination-scene img {object-position:37% center;}
 .destination-brahm .destination-scene img {object-position:40% center;}
-/* Atmospheric artwork for the two newly described lands; no unrelated images reused. */
-.scene-kryger {
- background:
-  radial-gradient(ellipse at 52% 20%,#b2bfa15e,transparent 52%),
-  linear-gradient(145deg,#41684e 0%,#24493f 46%,#0b2424 100%);
-}
-.scene-kryger::before {
- content:"";position:absolute;inset:0;opacity:.76;
- background:repeating-linear-gradient(89deg,transparent 0 9%,#0b2823ca 10% 11.5%,transparent 12% 19%);
-}
-.scene-triumvirate {
- background:
-  radial-gradient(ellipse at 73% 18%,#dfd4b45c,transparent 35%),
-  linear-gradient(170deg,#92aba6 0%,#42686b 45%,#23494e 75%,#142d32 100%);
-}
-.scene-triumvirate::before {
- content:"";position:absolute;inset:auto 0 0;height:71%;
- background:#1d4145a8;
- clip-path:polygon(0 85%,10% 51%,20% 70%,35% 18%,45% 49%,59% 9%,72% 63%,86% 29%,100% 61%,100% 100%,0 100%);
-}
-.scenic-glyph {
- position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);
- color:#f4e7c0c4;font:normal 4rem Georgia,serif;text-shadow:0 0 25px #e5e0b447;
-}
-.scene-kryger .scenic-glyph {font-size:5rem;}
+.destination-kryger .destination-scene img { object-position: center center; }
+.destination-triumvirate .destination-scene img { object-position: center center; }
+
 .destination-content {flex:1;padding:1.5rem;display:flex;flex-direction:column;}
 .destination-type {color:var(--gold);font:800 .65rem/1.5 Arial,sans-serif;letter-spacing:.18em;}
 .destination h3 {margin:.7rem 0 1rem;font:normal clamp(1.8rem,2.7vw,2.45rem)/1.1 Georgia,serif;}
