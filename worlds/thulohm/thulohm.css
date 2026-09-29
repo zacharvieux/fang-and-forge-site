@@ -77,7 +77,9 @@ a:focus-visible {outline:2px solid var(--gold-bright);outline-offset:4px;}
 .destination-heading {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.65fr);gap:2rem;align-items:end;margin-bottom:2.2rem;}
 .destination-heading h2 {margin-bottom:0;max-width:680px;}
 .destination-heading>p {margin:0;color:#c5d4ca;font-size:1.08rem;}
-.destinations-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;}
+.destinations-grid {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1rem;}
+.destination {grid-column:span 2;}
+.destination:nth-child(n+4) {grid-column:span 3;}
 .destination {overflow:hidden;display:flex;flex-direction:column;background:#142223;border:1px solid var(--line);min-width:0;}
 .destination-scene {height:225px;position:relative;overflow:hidden;background:#152b2c;}
 .destination-scene img {display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;}
@@ -86,6 +88,31 @@ a:focus-visible {outline:2px solid var(--gold-bright);outline-offset:4px;}
 .destination-taurniel .destination-scene img {object-position:57% center;}
 .destination-adamant .destination-scene img {object-position:37% center;}
 .destination-brahm .destination-scene img {object-position:40% center;}
+/* Atmospheric artwork for the two newly described lands; no unrelated images reused. */
+.scene-kryger {
+ background:
+  radial-gradient(ellipse at 52% 20%,#b2bfa15e,transparent 52%),
+  linear-gradient(145deg,#41684e 0%,#24493f 46%,#0b2424 100%);
+}
+.scene-kryger::before {
+ content:"";position:absolute;inset:0;opacity:.76;
+ background:repeating-linear-gradient(89deg,transparent 0 9%,#0b2823ca 10% 11.5%,transparent 12% 19%);
+}
+.scene-triumvirate {
+ background:
+  radial-gradient(ellipse at 73% 18%,#dfd4b45c,transparent 35%),
+  linear-gradient(170deg,#92aba6 0%,#42686b 45%,#23494e 75%,#142d32 100%);
+}
+.scene-triumvirate::before {
+ content:"";position:absolute;inset:auto 0 0;height:71%;
+ background:#1d4145a8;
+ clip-path:polygon(0 85%,10% 51%,20% 70%,35% 18%,45% 49%,59% 9%,72% 63%,86% 29%,100% 61%,100% 100%,0 100%);
+}
+.scenic-glyph {
+ position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);
+ color:#f4e7c0c4;font:normal 4rem Georgia,serif;text-shadow:0 0 25px #e5e0b447;
+}
+.scene-kryger .scenic-glyph {font-size:5rem;}
 .destination-content {flex:1;padding:1.5rem;display:flex;flex-direction:column;}
 .destination-type {color:var(--gold);font:800 .65rem/1.5 Arial,sans-serif;letter-spacing:.18em;}
 .destination h3 {margin:.7rem 0 1rem;font:normal clamp(1.8rem,2.7vw,2.45rem)/1.1 Georgia,serif;}
@@ -134,7 +161,7 @@ a:focus-visible {outline:2px solid var(--gold-bright);outline-offset:4px;}
 
 @media(max-width:950px) {
  .destinations-grid {grid-template-columns:1fr;}
- .destination {display:grid;grid-template-columns:minmax(200px,.7fr) minmax(0,1.3fr);}
+ .destination,.destination:nth-child(n+4) {grid-column:auto;display:grid;grid-template-columns:minmax(200px,.7fr) minmax(0,1.3fr);}
  .destination-scene {height:100%;min-height:290px;}
  .destination-content {padding:1.5rem;}
 }
@@ -158,7 +185,7 @@ a:focus-visible {outline:2px solid var(--gold-bright);outline-offset:4px;}
  .era-milestone {flex:1;}
  .era-milestone strong {font-size:2.65rem;}
  .statement-inner {gap:.7rem;}
- .destination {display:flex;}
+ .destination,.destination:nth-child(n+4) {display:flex;flex-direction:column;}
  .destination-scene {min-height:0;height:190px;}
  .destination-content {padding:1.3rem;}
  .adventure h2 {font-size:clamp(2.4rem,10vw,3.8rem);}
